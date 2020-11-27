@@ -12,7 +12,10 @@ Running the app.js will (hopefully) produce 2 json outputs, "data.json" contains
 This was a personal project, used to scrape and identify in-play bets within a min-return and (hopefully) safer betting range, used this with the "1.01" betting strat.
 
 # Todo
-- [ ] Add more data from betfair scrape (at the moment it's only url and odds):
-  - [ ] Title
-  - [ ] Sport
-  - [ ] Type of bet instance
+- [ ] add more data from betfair scrape (at the moment it's only url and odds):
+  - [ ] title
+  - [ ] sport
+  - [ ] type of bet instance
+  - [ ] implement data into index.html demo
+- [ ] demo index.html add html notifications to alert user on new bets
+  - [ ] checkbox each row to disable its notification
