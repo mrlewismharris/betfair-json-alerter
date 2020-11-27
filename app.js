@@ -3,8 +3,13 @@ const cheerio = require('cheerio');
 const request = require('request');
 
 const url = 'https://www.betfair.com/sport/inplay';
+const loopDelay = 2500;
 //returned 1/100 = 0.01 (0.01=1% return)
-const returnMax = 0.05;
+const minOdds = "1/100";
+const returnMax = (minOdds.split('/')[0]) / (minOdds.split('/')[1]);
+console.log("Min odds loaded: " + returnMax);
+
+var lastCount = "";
 
 function loop() {
 	request(url, function(error, response, body) {
@@ -29,10 +34,13 @@ function loop() {
 		}
 		fs.writeFile('data.json', JSON.stringify(out), function(err) {
 			if (err) throw err;
-			console.log("Bets within max value: " + countBets(out) + "/" + count);
+			if (lastCount!==countBets(out)) {
+				lastCount=countBets(out);
+				console.log("Total bet count updated: " + countBets(out) + "/" + count);
+			}
 		});
 	});
-	setTimeout(loop, 10000);
+	setTimeout(loop, loopDelay);
 };loop();
 
 function countBets(data) {
