@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- README!!!! Browsers prohibits access to local files. Must be hosted on a web-server!  -->
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title>betfair-json demo</title>
+<style>
+	body {font-family:arial}
+	.center {text-align:center}
+	h2 {margin:0px}
+	p {margin:0px}
+	table {margin-top:15px;font-size:13px;width:100%;border:1px solid #ddd}
+	td, th {text-align:center;padding:3px;margin:0px;}
+	tr:nth-child(even) {background-color:#ddd}
+</style>
+</head>
+<body>
+<h2 class="center">BetFair json data table</h2>
+<p class="center"><button onclick="update()">Update</button>
+<label> Auto-update: </label><input onclick="loop()" type="checkbox" id="autoupdate" value="Auto-update"></p>
+<div id="output"></div>
+</body>
+<script>
+function loop() {
+	if ($('#autoupdate').prop("checked")) {
+		update();
+		setTimeout(loop, 1000);
+	}
+};loop();
+
+function update() {
+	var json = $.getJSON("validated.json", function(response) {
+		var items = "";
+		for (var i=0;i<response.length;i++) {
+			items=items+"<tr><td><a href='"+
+			response[i][0]+"'>"+
+			response[i][0]+"</a></td><td>"+
+			response[i][1]+"</td></tr>";
+		}
+		$('#output').html("<table>"+items+"</table>");
+	});
+};
+
+update();
+</script>
+</html>
