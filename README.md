@@ -11,7 +11,7 @@ Running the app.js will (hopefully) produce 2 json outputs, "data.json" contains
 # Why?
 This was a personal project, used to scrape and identify in-play bets within a min-return and (hopefully) safer betting range, used this with the "1.01" betting strat.
 
-# Demo index.html usage
+# demo.html usage
 Place into same directory as app.js (and json outputs) - browsers security standards don't allow local file loading (i.e. this index.html loaded into firefox cannot load the .json files, console.log recieves an error about CORS or something, annoyingly). Make sure you host this file and the json files in a web-server - I wouldn't suggest opening this app to the internet for security reasons, especially with the current setup/config with the app.js in the same directory.
 
 # Todo
