@@ -24,3 +24,15 @@ Place into same directory as app.js (and json outputs) - browsers security stand
   - [ ] implement data into index.html demo
 - [ ] demo index.html add html notifications to alert user on new bets
   - [ ] checkbox each row to disable its notification
+- [ ] Scraped history: Output a file with json data of all the matches, like below
+
+proposed betfair bet history json:
+{
+  {
+    "title": "team-vs-team",
+    "url": "https://www.betfair.com/sport/football/team-vs-team/0123285",
+    "Odds": [
+        {"date": "odds"}
+      ]
+  }
+}
