@@ -11,7 +11,7 @@ GitHub pages hosted index.html (calculator) : https://mrlewismharris.github.io/b
 # How to use
  - save all files in a folder
  - run "start-app.bat" (windows only)
- - go to http://localhost:3000/" to view the list demo
+ - go to http://localhost:3000/ to view the list demo
  - (optional) open "app.js" in a text editor to change the min odds, loop delay (in ms) and server port.
 
 # What does this do?
