@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<title>betfair-json exp-calculator</title>
+<style>
+	body {font-family:arial}
+	.center {text-align:center;margin:auto;}
+	h2 {margin:0px}
+	#form {width:320px;padding:20px;}
+	input {width:80%;}
+	#output {width:100%;position:relative;left:-5px}
+	table#results {min-width:175px;width:20%;text-align:center;display:inline-block;float:left;}
+	table#results td {width:1000px}
+	table#results tr:nth-child(even) {background-color:#ccc}
+	#results {padding:0px;margin:0px;}
+</style>
+</head>
+<body>
+
+<h2 class="center">Exponential Growth Betting Calculator</h2>
+<div id="form" class="center">
+	<table style="width:100%">
+		<tr>
+			<td>Initial bet: </td>
+			<td><input id="bet" type="text" value="5"></td>
+		</tr>
+		<tr>
+			<td>Avg odds: </td>
+			<td><input id="odds" type="text" value="1/100"></td>
+		</tr>
+			<td>Daily bets made: </td>
+			<td><input id="daily" type="text" value="5"></td>
+		</tr>
+	</table>
+	<button style="width:100%;margin-top:5px;" onclick="calc()">Calculate</button>
+</div>
+
+<div id="output"></div>
+
+</body>
+<script>
+function calc() {
+	var bet = $("#bet").val();
+	var odds = $("#odds").val();
+	var daily = $("#daily").val();
+	
+	var results = [];
+	var total = bet;
+	var convertedOdds = (odds.split("/")[0]) / (odds.split("/")[1]) + 1;
+	
+	for (var y=0;y<5;y++) {
+		for (var m=0;m<12;m++) {
+			for (var w=0;w<4;w++) {
+				for (var d=0;d<7;d++) {
+					for (var b=0;b<daily;b++) {
+						total = total * convertedOdds;
+						if (d<1&&w<1&&m<1&&y<1) {results.push(["b", total])};
+					}
+					if (d<7&&w<1&&m<1&&y<1) {results.push(["d", total])}
+				}
+				if (w<4&&m<1&&y<1) {results.push(["w", total])}
+			}
+			if (m<12&&y<1) {results.push(["m", total])}
+		}
+		results.push(["y", total])
+	}
+	makeTables(results);
+}
+function makeTables(results) {
+	$('#output').html("");
+
+	var bTable = '<table id="results"><tr><th>Single Return</th></tr>';
+	for (var i=0;i<results.length;i++) {
+		if (results[i][0]=="b") {bTable=bTable+'<tr><td>'+parseFloat(results[i][1]).toFixed(2)+'</td></tr>'}
+	}; bTable=bTable+'</table>';
+	$('#output').append(bTable);
+	
+	var dTable = '<table id="results"><tr><th>Daily Return</th></tr>';
+	for (var i=0;i<results.length;i++) {
+		if (results[i][0]=="d") {dTable=dTable+'<tr><td>'+parseFloat(results[i][1]).toFixed(2)+'</td></tr>'}
+	}; dTable=dTable+'</table>';
+	$('#output').append(dTable);
+	
+	var wTable = '<table id="results"><tr><th>Weekly Return</th></tr>';
+	for (var i=0;i<results.length;i++) {
+		if (results[i][0]=="w") {wTable=wTable+'<tr><td>'+parseFloat(results[i][1]).toFixed(2)+'</td></tr>'}
+	}; wTable=wTable+'</table>';
+	$('#output').append(wTable);
+	
+	var mTable = '<table id="results"><tr><th>Monthly Return</th></tr>';
+	for (var i=0;i<results.length;i++) {
+		if (results[i][0]=="m") {mTable=mTable+'<tr><td>'+parseFloat(results[i][1]).toFixed(2)+'</td></tr>'}
+	}; mTable=mTable+'</table>';
+	$('#output').append(mTable);
+	
+	var yTable = '<table id="results"><tr><th>Yearly Return</th></tr>';
+	for (var i=0;i<results.length;i++) {
+		if (results[i][0]=="y") {yTable=yTable+'<tr><td>'+parseFloat(results[i][1]).toFixed(2)+'</td></tr>'}
+	}; yTable=yTable+'</table>';
+	$('#output').append(yTable);
+}
+</script>
+</html>
+
+
+
+
+

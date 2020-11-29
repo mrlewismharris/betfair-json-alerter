@@ -1,14 +1,23 @@
 const fs = require('fs');
 const cheerio = require('cheerio');
 const request = require('request');
+const http = require('http');
 
+//server conf
+const serverport = '3000';
+
+//display odds list parameters
 const url = 'https://www.betfair.com/sport/inplay';
 const loopDelay = 2500;
-//returned 1/100 = 0.01 (0.01=1% return)
-const minOdds = "1/100";
-const returnMax = (minOdds.split('/')[0]) / (minOdds.split('/')[1]);
-console.log("Min odds loaded: " + returnMax);
+const minOdds = "1/50";
 
+
+
+
+
+//some global vars
+const returnMax = (minOdds.split('/')[0]) / (minOdds.split('/')[1]);
+console.log("Min odds loaded: " + minOdds + " : " + returnMax + " : ~" + (returnMax*100) + "% return");
 var lastCount = "";
 
 function loop() {
@@ -59,4 +68,19 @@ function countBets(data) {
 	return count;
 }
 
-
+http.createServer(function (req, res) {
+	var fileReq = "/index.html";
+	if (req.url!=="/") {
+		fileReq=req.url;
+	}
+  fs.readFile(__dirname + fileReq, function (err,data) {
+    if (err) {
+      res.writeHead(404);
+      res.end(JSON.stringify(err));
+      return;
+    }
+    res.writeHead(200);
+    res.end(data);
+  });
+}).listen(serverport);
+console.log("Server started on port " + serverport);
