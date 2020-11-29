@@ -10,6 +10,9 @@ GitHub pages hosted index.html (calculator) : https://mrlewismharris.github.io/b
 
 # How to use
  - save all files in a folder
+ - install required moduels: 
+  - open cmd, cd to the folder you just made,
+  - install cheero and request (use commands in the requires section above)
  - run "start-app.bat" (windows only)
  - go to http://localhost:3000/ to view the list demo
  - (optional) open "app.js" in a text editor to change the min odds, loop delay (in ms) and server port.
