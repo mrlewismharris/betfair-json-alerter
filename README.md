@@ -1,5 +1,5 @@
 # PLEASE READ:
-There's a massive issue that causes the app to crash on no response - I am in the process of fixing this so the app stays alive and doesn't try to parse the data along to be scraped and then crashing because the array index isn't available.
+There's a massive issue that causes the app to crash on no response. This issue produces very strange effects, lags out the rest of my connection, maybe don't use wifi?
 
 # betfair-json-alerter
 A nodejs app that loops a scrape of the in-play bets available from betfair and hosts an http web-server.
